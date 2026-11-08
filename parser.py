@@ -1,9 +1,15 @@
 import re
+import sys
 from collections import Counter
 
+if len(sys.argv) < 2:
+    print("Usage: python parser.py <logfile>")
+    sys.exit(1)
+
+logfile = sys.argv[1]
 failed_by_ip = Counter()
 
-with open("sample.log") as f:
+with open(logfile) as f:
     for line in f:
         if "Failed password" in line:
             match = re.search(r"from (\d+\.\d+\.\d+\.\d+)", line)
