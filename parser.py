@@ -2,6 +2,8 @@ import re
 import sys
 from collections import Counter
 
+THRESHOLD = 3
+
 if len(sys.argv) < 2:
     print("Usage: python parser.py <logfile>")
     sys.exit(1)
@@ -18,4 +20,7 @@ with open(logfile) as f:
 
 print("Failed logins by IP:")
 for ip, count in failed_by_ip.most_common():
-    print(ip, count)
+    if count >= THRESHOLD:
+        print(ip, count, "<-- SUSPICIOUS")
+    else:
+        print(ip, count)
