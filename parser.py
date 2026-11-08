@@ -38,3 +38,11 @@ for ip, count in failed_by_ip.most_common():
         print(ip, count, "<-- BRUTE FORCE (burst)")
     else:
         print(ip, count)
+
+
+flagged = [ip for ip in failed_by_ip if has_burst(times_by_ip[ip])]
+print()
+print("Summary")
+print("Total failed logins:", sum(failed_by_ip.values()))
+print("Unique IPs:", len(failed_by_ip))
+print("IPs flagged for brute force:", len(flagged))
